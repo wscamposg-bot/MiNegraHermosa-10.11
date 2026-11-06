@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0716">
+    <meta name="description" content="Una pequeña aventura sideral para celebrar nuestra historia.">
+    <title>Nuestra Historia Sideral 💜 — 4 Años</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script defer src="js/data.js"></script>
+    <script defer src="js/levels.js"></script>
+    <script defer src="js/main.js"></script>
+</head>
+<body>
+    <canvas id="starfield" aria-hidden="true"></canvas>
+    <div class="nebula nebula-one" aria-hidden="true"></div>
+    <div class="nebula nebula-two" aria-hidden="true"></div>
+    <div class="nebula nebula-three" aria-hidden="true"></div>
+    <div id="ambient-particles" aria-hidden="true"></div>
+
+    <main class="page-shell">
+        <section class="story-card" aria-live="polite">
+            <header class="card-header">
+                <a class="brand" href="#" aria-label="Nuestra historia sideral">
+                    <span class="brand-orbit" aria-hidden="true">✦</span>
+                    <span>Nuestra historia sideral</span>
+                </a>
+                <button class="icon-button reset-button" id="reset-button" type="button" aria-label="Reiniciar aventura" title="Reiniciar">↻</button>
+            </header>
+
+            <section id="welcome-screen" class="screen active" aria-labelledby="welcome-title">
+                <div class="eyebrow"><span class="eyebrow-line"></span> Una aventura para dos <span class="eyebrow-line"></span></div>
+                <div class="hero-heart" aria-hidden="true">💜</div>
+                <h1 id="welcome-title" class="display-title">Tengo algo<br>para ti<span class="title-sparkle"> ✦</span></h1>
+                <p class="intro-copy">Ocho pequeños candados guardan recuerdos de nuestra historia. ¿Lista para abrirlos conmigo?</p>
+                <button class="button button-primary" id="start-button" type="button">Comenzar <span aria-hidden="true">→</span></button>
+                <p class="tiny-note">Hecho con amor, para mi persona favorita.</p>
+            </section>
+
+            <section id="game-screen" class="screen" aria-labelledby="level-title" hidden>
+                <div class="progress-wrap">
+                    <div class="progress-copy">
+                        <span id="lock-counter">Candado 1 de 8</span>
+                        <span id="progress-percent">12%</span>
+                    </div>
+                    <div class="progress-track" role="progressbar" aria-label="Progreso de los candados" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0">
+                        <span class="progress-fill" id="progress-fill"></span>
+                    </div>
+                    <div class="lock-row" id="lock-row" aria-label="Estado de candados"></div>
+                </div>
+                <div class="level-content" id="level-content"></div>
+                <p class="feedback" id="feedback" role="status" aria-live="assertive"></p>
+            </section>
+
+            <section id="final-screen" class="screen final-screen" aria-labelledby="final-title" hidden>
+                <div class="eyebrow"><span class="eyebrow-line"></span> Y vivieron más aventuras <span class="eyebrow-line"></span></div>
+                <p class="final-kicker">El universo conspiró bonito</p>
+                <h1 id="final-title" class="display-title final-title">¡Feliz 4 años,<br>mi amor! <span class="title-heart">💜</span></h1>
+                <p class="final-subtitle">Y esto apenas es el comienzo de todo lo que nos espera.</p>
+
+                <article class="ticket" id="concert-ticket">
+                    <span class="ticket-shine" aria-hidden="true"></span>
+                    <div class="ticket-main">
+                        <p class="ticket-overline">Una noche para cantar juntos</p>
+                        <h2>Concierto de<br><span>Mägo de Oz</span></h2>
+                        <div class="ticket-details">
+                            <p><span>FECHA</span>26 de febrero de 2027</p>
+                            <p><span>HORA</span>8:00 PM</p>
+                            <p><span>INVITADA ESPECIAL</span>El amor de mi vida 💜</p>
+                        </div>
+                    </div>
+                    <div class="ticket-stub">
+                        <div class="ticket-image-wrap" data-placeholder="🎟️">
+                            <img src="assets/img/entrada.jpg" alt="Entrada para el concierto" data-fallback="assets/img/boleta.jpg">
+                        </div>
+                        <span class="stub-caption">NUESTRA PRÓXIMA AVENTURA</span>
+                        <span class="stub-heart" aria-hidden="true">♥</span>
+                    </div>
+                </article>
+
+                <section class="countdown-section" aria-labelledby="countdown-title">
+                    <p class="section-eyebrow">GUARDA EN EL CORAZÓN</p>
+                    <h2 id="countdown-title" class="section-title">La cuenta regresiva</h2>
+                    <div class="countdown" id="countdown" aria-label="Cuenta regresiva para el concierto">
+                        <div class="time-tile"><span id="days">000</span><small>días</small></div>
+                        <div class="time-tile"><span id="hours">00</span><small>horas</small></div>
+                        <div class="time-tile"><span id="minutes">00</span><small>minutos</small></div>
+                        <div class="time-tile"><span id="seconds">00</span><small>segundos</small></div>
+                    </div>
+                </section>
+
+                <section class="letter-section" aria-labelledby="letter-title">
+                    <p class="section-eyebrow">UNAS PALABRITAS PARA TI</p>
+                    <h2 id="letter-title" class="section-title">Con todo mi amor</h2>
+                    <article class="letter-paper">
+                        <span class="letter-decoration" aria-hidden="true">✦</span>
+                        <p id="letter-text" class="letter-text"></p>
+                        <p class="letter-signature" id="letter-signature">Siempre tuyo, <span>el negro 💜</span></p>
+                    </article>
+                    <button class="text-button" id="skip-letter" type="button">Saltar animación</button>
+                </section>
+
+                <section class="gallery-section" aria-labelledby="gallery-title">
+                    <p class="section-eyebrow">PEDACITOS DE NOSOTROS</p>
+                    <h2 id="gallery-title" class="section-title">Nuestros recuerdos <span aria-hidden="true">💜</span></h2>
+                    <p class="gallery-intro">Cada foto guarda un mundo que me encanta volver a visitar.</p>
+                    <div class="photo-gallery" id="photo-gallery"></div>
+                </section>
+
+                <button class="button button-primary repeat-button" id="repeat-confetti" type="button">🎊 Repetir confeti</button>
+                <p class="closing-note">Te amo, hoy y en todos nuestros universos. <span>✦</span></p>
+            </section>
+        </section>
+        <p class="page-footnote">Bajo el mismo cielo, siempre. <span aria-hidden="true">✧</span></p>
+    </main>
+
+    <button class="dev-jump" id="dev-jump" type="button" hidden>Ir al final 💜</button>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada de nuestros recuerdos" hidden>
+        <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Cerrar">×</button>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev" type="button" aria-label="Foto anterior">‹</button>
+        <figure class="lightbox-figure">
+            <div class="lightbox-image-wrap" data-placeholder="💜">
+                <img id="lightbox-image" alt="">
+            </div>
+            <figcaption id="lightbox-caption"></figcaption>
+        </figure>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next" type="button" aria-label="Foto siguiente">›</button>
+    </div>
+</body>
+</html>
