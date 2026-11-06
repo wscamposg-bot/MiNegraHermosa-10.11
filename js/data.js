@@ -1,6 +1,4 @@
 // Contenido de la aventura. Las respuestas de texto se comparan sin tildes.
-const DEV_MODE = true;
-
 const LEVELS = [
     {
         title: "El Inicio de Todo",
@@ -79,12 +77,12 @@ const LEVELS = [
 const LETTER_TEXT = "Feliz 4 años, mi amor. 💜 Espero que esto te haga feliz, porque me encanta verte feliz. Y con lo poquito que tengo, voy a darte el mundo entero, de a poquitos, lentico, pero juntos. Sé que llegaremos muy lejos y espero seguir creciendo y mejorando junto al amor de mi vida, mi compañera del alma, mi ser, mi pilar. Lo eres todo, morocha hermosa. Te amo mucho, te amo demasiado, princesa hermosa. Gracias por estos 4 años y por seguir caminando a mi lado. 10-11, morochita.";
 
 const GALLERY_PHOTOS = [
-    { src: "assets/img/foto1.jpg", caption: "Primera Cita", alt: "Un recuerdo de nuestra primera cita" },
+    { src: "assets/img/foto1.jpg", caption: "Foto iconica", alt: "Nuestro refuerzo" },
     { src: "assets/img/foto2.jpg", caption: "Nosotros bien bonitos", alt: "Nosotros juntos y felices" },
     { src: "assets/img/foto3.jpg", caption: "Piscilago", alt: "Un recuerdo de nuestra visita a Piscilago" },
     { src: "assets/img/foto4.jpg", caption: "Útica", alt: "Un recuerdo de nuestro viaje a Útica" },
     { src: "assets/img/foto5.jpg", caption: "Soatá", alt: "Un recuerdo de Soatá" },
-    { src: "assets/img/foto6.jpg", caption: "Viotá", alt: "Un recuerdo de Viotá" },
+    { src: "assets/img/foto6.jpg", caption: "Nosotros otra vez", alt: "Beios beios" },
     { src: "assets/img/foto7.jpg", caption: "Nuestras Salidas", alt: "Un recuerdo de nuestras salidas" },
     { src: "assets/img/foto8.jpg", caption: "Siempre Juntos", alt: "Un recuerdo de nosotros siempre juntos" }
 ];

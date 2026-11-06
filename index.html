@@ -62,25 +62,36 @@
                 <h1 id="final-title" class="display-title final-title">¡Feliz 4 años,<br>mi amor! <span class="title-heart">💜</span></h1>
                 <p class="final-subtitle">Y esto apenas es el comienzo de todo lo que nos espera.</p>
 
-                <article class="ticket" id="concert-ticket">
-                    <span class="ticket-shine" aria-hidden="true"></span>
-                    <div class="ticket-main">
-                        <p class="ticket-overline">Una noche para cantar juntos</p>
-                        <h2>Concierto de<br><span>Mägo de Oz</span></h2>
-                        <div class="ticket-details">
-                            <p><span>FECHA</span>26 de febrero de 2027</p>
-                            <p><span>HORA</span>8:00 PM</p>
-                            <p><span>INVITADA ESPECIAL</span>El amor de mi vida 💜</p>
-                        </div>
+                <div class="ticket-scene" id="concert-ticket" tabindex="0" role="button" aria-pressed="false" aria-label="Boleto del concierto. Pasa el cursor o pulsa para ver el código QR.">
+                    <div class="ticket-flip">
+                        <article class="ticket ticket-front">
+                            <span class="ticket-shine" aria-hidden="true"></span>
+                            <div class="ticket-main">
+                                <p class="ticket-overline">Una noche para cantar juntos</p>
+                                <h2>Concierto de<br><span>Mägo de Oz</span></h2>
+                                <div class="ticket-details">
+                                    <p><span>FECHA</span>26 de febrero de 2027</p>
+                                    <p><span>HORA</span>8:00 PM</p>
+                                    <p><span>INVITADA ESPECIAL</span>El amor de mi vida 💜</p>
+                                </div>
+                            </div>
+                            <div class="ticket-stub">
+                                <div class="ticket-image-wrap" data-placeholder="🎟️">
+                                    <img src="assets/img/entrada.jpg" alt="Entrada para el concierto" data-fallback="assets/img/boleta.jpg">
+                                </div>
+                                <span class="stub-caption">NUESTRA PRÓXIMA AVENTURA</span>
+                                <span class="stub-heart" aria-hidden="true">♥</span>
+                            </div>
+                        </article>
+                        <article class="ticket ticket-back" aria-label="Código QR de la entrada">
+                            <span class="ticket-back-kicker">TU ENTRADA ESPECIAL</span>
+                            <div class="ticket-qr-wrap" data-placeholder="▦">
+                                <img src="assets/img/qr-entrada.jpg" alt="Código QR de la entrada al concierto">
+                            </div>
+                            <span class="ticket-back-caption">Un recuerdo para nuestra próxima aventura 💜</span>
+                        </article>
                     </div>
-                    <div class="ticket-stub">
-                        <div class="ticket-image-wrap" data-placeholder="🎟️">
-                            <img src="assets/img/entrada.jpg" alt="Entrada para el concierto" data-fallback="assets/img/boleta.jpg">
-                        </div>
-                        <span class="stub-caption">NUESTRA PRÓXIMA AVENTURA</span>
-                        <span class="stub-heart" aria-hidden="true">♥</span>
-                    </div>
-                </article>
+                </div>
 
                 <section class="countdown-section" aria-labelledby="countdown-title">
                     <p class="section-eyebrow">GUARDA EN EL CORAZÓN</p>
@@ -118,18 +129,16 @@
         <p class="page-footnote">Bajo el mismo cielo, siempre. <span aria-hidden="true">✧</span></p>
     </main>
 
-    <button class="dev-jump" id="dev-jump" type="button" hidden>Ir al final 💜</button>
-
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada de nuestros recuerdos" hidden>
-        <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Cerrar">×</button>
-        <button class="lightbox-nav lightbox-prev" id="lightbox-prev" type="button" aria-label="Foto anterior">‹</button>
+        <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Cerrar"></button>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev" type="button" aria-label="Foto anterior"></button>
         <figure class="lightbox-figure">
             <div class="lightbox-image-wrap" data-placeholder="💜">
                 <img id="lightbox-image" alt="">
             </div>
             <figcaption id="lightbox-caption"></figcaption>
         </figure>
-        <button class="lightbox-nav lightbox-next" id="lightbox-next" type="button" aria-label="Foto siguiente">›</button>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next" type="button" aria-label="Foto siguiente"></button>
     </div>
 </body>
 </html>

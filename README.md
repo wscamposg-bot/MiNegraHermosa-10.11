@@ -8,6 +8,7 @@ Coloca las imágenes opcionales en `assets/img/`:
 
 - `entrada.jpg` (si no está, se intenta `boleta.jpg`)
 - `boleta.jpg` (respaldo de la entrada)
+- `qr-entrada.jpg` — imagen del código QR; aparece al girar el boleto
 - `foto1.jpg` — Primera Cita
 - `foto2.jpg` — Nosotros bien bonitos
 - `foto3.jpg` — Piscilago
@@ -21,4 +22,4 @@ Si una imagen no está disponible, se muestra un placeholder sideral morado en s
 
 ## Personalización
 
-Edita las preguntas y respuestas, la carta y los textos de la galería en `js/data.js`. El botón de pruebas «Ir al final» se controla con `DEV_MODE`.
+Edita las preguntas y respuestas, la carta y los textos de la galería en `js/data.js`.

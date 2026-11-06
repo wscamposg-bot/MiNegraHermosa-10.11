@@ -29,7 +29,6 @@
         console.warn("No se pudo recuperar el progreso guardado.", error);
     }
 
-    document.getElementById("dev-jump").hidden = !DEV_MODE;
     lockRow.innerHTML = LEVELS.map((_, index) => `<span class="lock-icon${index < unlocked ? " unlocked" : ""}" aria-hidden="true">${index < unlocked ? "🔓" : "🔒"}</span>`).join("");
     updateProgress();
     setupBackground();
@@ -70,9 +69,12 @@
     }
 
     function renderCurrentLevel() {
+        content.classList.remove("level-exit", "level-enter");
+        void content.offsetWidth;
         feedback.textContent = "";
         feedback.classList.remove("visible");
         renderLevel(currentLevel, { submit: handleAnswer });
+        content.classList.add("level-enter");
         updateProgress();
     }
 
@@ -253,8 +255,8 @@
     }
 
     function setupImageFallbacks() {
-        document.querySelectorAll(".ticket-image-wrap img").forEach((image) => {
-            image.addEventListener("error", () => {
+        document.querySelectorAll(".ticket-image-wrap img, .ticket-qr-wrap img").forEach((image) => {
+            const hideIfMissing = () => {
                 const fallback = image.dataset.fallback;
                 if (fallback && !image.dataset.fallbackTried) {
                     image.dataset.fallbackTried = "true";
@@ -262,7 +264,9 @@
                 } else {
                     image.classList.add("image-failed");
                 }
-            });
+            };
+            image.addEventListener("error", hideIfMissing);
+            if (image.complete && image.naturalWidth === 0) hideIfMissing();
         });
     }
 
@@ -279,7 +283,6 @@
             updateProgress();
             window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
         });
-        document.getElementById("dev-jump").addEventListener("click", showFinal);
         document.getElementById("skip-letter").addEventListener("click", () => {
             window.clearInterval(letterTimer);
             document.getElementById("letter-text").textContent = LETTER_TEXT;
@@ -306,14 +309,30 @@
             const delta = event.changedTouches[0].screenX - touchStartX;
             if (Math.abs(delta) > 45) moveLightbox(delta < 0 ? 1 : -1);
         }, { passive: true });
-        document.getElementById("concert-ticket").addEventListener("pointermove", (event) => {
+        const ticket = document.getElementById("concert-ticket");
+        ticket.addEventListener("pointermove", (event) => {
             if (reducedMotion || event.pointerType === "touch") return;
             const rect = event.currentTarget.getBoundingClientRect();
             const rotateY = ((event.clientX - rect.left) / rect.width - .5) * 5;
             const rotateX = ((event.clientY - rect.top) / rect.height - .5) * -4;
-            event.currentTarget.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            event.currentTarget.style.setProperty("--ticket-rotate-x", `${rotateX}deg`);
+            event.currentTarget.style.setProperty("--ticket-rotate-z", `${rotateY * .25}deg`);
         });
-        document.getElementById("concert-ticket").addEventListener("pointerleave", (event) => { event.currentTarget.style.transform = ""; });
+        ticket.addEventListener("pointerleave", (event) => {
+            event.currentTarget.style.removeProperty("--ticket-rotate-x");
+            event.currentTarget.style.removeProperty("--ticket-rotate-z");
+        });
+        ticket.addEventListener("pointerup", (event) => {
+            if (event.pointerType !== "touch") return;
+            const flipped = ticket.classList.toggle("is-flipped");
+            ticket.setAttribute("aria-pressed", String(flipped));
+        });
+        ticket.addEventListener("keydown", (event) => {
+            if (event.key !== "Enter" && event.key !== " ") return;
+            event.preventDefault();
+            const flipped = ticket.classList.toggle("is-flipped");
+            ticket.setAttribute("aria-pressed", String(flipped));
+        });
         document.addEventListener("click", (event) => {
             const button = event.target.closest(".button");
             if (!button || reducedMotion) return;
